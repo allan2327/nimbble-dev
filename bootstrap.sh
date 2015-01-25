@@ -16,4 +16,4 @@ source nimbble-dev/bin/activate
 
 echo "Installing requirements"
 cd nimbble-dev
-pip install -r requirements.txt
+pip install -r requirements/local.txt

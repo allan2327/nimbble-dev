@@ -60,3 +60,6 @@ notes.txt
 
 #Vagrant
 .vagrant
+
+/node_modules
+*.sqlite3
