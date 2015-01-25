@@ -31,7 +31,7 @@ Developent Environment with Vagrant
   * This will download the image if it is the first time it is ran.
   * After the image is loaded it will provision the commands on bootstrap.sh
   * Could take some time the first time.
-4. Type to ssh into your dev environment: vagrant ssh
+4. To ssh into your dev environment type: vagrant ssh
 5. Type: cd /nimbble-dev
 6. Activate virtual env. 
   * Type: source bin/active
@@ -44,7 +44,7 @@ Developent Environment with Vagrant
 
 ### Note:
 
-* To shutdown the vm from running you can exit ssh and run:
+* To shutdown the vm from running, you can exit ssh and run:
   * vagrant halt (Prefer if you want to shutdown the machine to free up some resources)
 * To suspend the vm. (A suspend effectively saves the exact point-in-time state of the machine, so that when you resume it later)
   * vagrant suspend
