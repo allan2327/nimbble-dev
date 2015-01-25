@@ -13,7 +13,7 @@ Quick Startup
  3) $>python nimbble\manage.py migrate
  4) $>python nimbble\manage.py runserver
 
-Developent Environment with Vagrant
+Development Environment with Vagrant
 -----------------------------------
 
 ### Requirements
