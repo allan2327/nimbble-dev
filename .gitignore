@@ -18,6 +18,8 @@ lib64/
 parts/
 sdist/
 var/
+bin/
+include/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -55,3 +57,6 @@ target/
 
 #MarkStuff
 notes.txt
+
+#Vagrant
+.vagrant
