@@ -2,7 +2,7 @@
 
 apt-get update > /dev/null
 
-echo "Installing python3"
+echo "Installing python3 and virtualenv"
 apt-get install -y python3  > /dev/null
 apt-get install -y python-virtualenv > /dev/null
 

@@ -13,8 +13,10 @@ Quick Startup
  3) $>python nimbble\manage.py migrate
  4) $>python nimbble\manage.py runserver
 
-Development Environment with Vagrant
+Development Environment with Vagrant 
 -----------------------------------
+
+* This is recomended if you are in a windows environment and a very good idea for other enviroments in general to isolate and configure your dev. environments.
 
 ### Requirements
 
@@ -30,7 +32,7 @@ Development Environment with Vagrant
 3. type: vagrant up
   * This will download the image if it is the first time it is ran.
   * After the image is loaded it will provision the commands on bootstrap.sh
-  * Could take some time the first time.
+  * Could take some time the first time, the last step specially when the requirements are installed with pip. 
 4. To ssh into your dev environment type: vagrant ssh
 5. Type: cd /nimbble-dev
 6. Activate virtual env. 
@@ -42,7 +44,7 @@ Development Environment with Vagrant
 7. From the host you can go to a browser and navigate to:
   * http://localhost:8000
 
-### Note:
+### Notes:
 
 * To shutdown the vm from running, you can exit ssh and run:
   * vagrant halt (Prefer if you want to shutdown the machine to free up some resources)
