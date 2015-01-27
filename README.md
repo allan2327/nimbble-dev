@@ -1,18 +1,5 @@
 # nimbble-dev
 
-Requirements
-------------
- [] python 3
- [] pip
- [] virtualenv (if you are smart)
-
-Quick Startup
--------------
- 1) clone repo, open cmd into directory
- 2) $>pip install -r requirements
- 3) $>python nimbble\manage.py migrate
- 4) $>python nimbble\manage.py runserver
-
 Development Environment with Vagrant 
 -----------------------------------
 
@@ -26,23 +13,18 @@ Development Environment with Vagrant
 
 ### Steps
 
+####Make sure you open your shell as an Administrator.
+
 1. Clone repo
 2. Navigate to repo folder.
   * cd nimbble-dev
 3. type: vagrant up
   * This will download the image if it is the first time it is ran.
   * After the image is loaded it will provision the commands on bootstrap.sh
-  * Could take some time the first time, the last step specially when the requirements are installed with pip. 
+  * Could take some time the first time.
 4. To ssh into your dev environment type: vagrant ssh
-5. Type: cd /nimbble-dev
-6. Activate virtual env. 
-  * Type: source bin/active
-  * Propmt should look like this: (nimbble-dev)vagrant@precise32:/nimbble-dev$
-7. python nimbble/manage.py migrate
-8. python nimbble/manage.py runserver 0.0.0.0:8000
-  * The host and the port with 0.0.0.0:8000 are requiered due to a django/virtualbox restriction for localhost and port forwarding.
-7. From the host you can go to a browser and navigate to:
-  * http://localhost:8000
+5. python nimbble/manage.py migrate
+8. grunt serve
 
 ### Notes:
 

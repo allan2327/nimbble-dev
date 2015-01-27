@@ -1,31 +1,5 @@
 #!/usr/bin/env bash
 
-# apt-get update > /dev/null
-
-# echo "Installing python3 and virtualenv"
-# apt-get install -y python3  > /dev/null
-
-# apt-get install -y python3-pip
-
-# apt-get build-dep -y python-psycopg2
-
-# pip3 install virtualenv
-
-# apt-get install -y python-virtualenv > /dev/null
-
-# echo "creating virtual environment with python 3"
-# cd /
-
-# pyvenv-3.4 nimbble-dev
-# virtualenv -p /usr/bin/python3 nimbble-dev
-
-# echo "activating virtual environment"
-# source nimbble-dev/bin/activate
-
-echo "Installing requirements"
-cd nimbble-dev
-pip install -r requirements/local.txt
-
 echo ""
 echo "apt-get update"
 echo ""
@@ -72,7 +46,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 mkvirtualenv nimbble-dev
 cd /nimbble-dev
-pip install -r -q requirements/local.txt
 npm install
 
 EOF
