@@ -23,7 +23,11 @@ Development Environment with Vagrant
   * After the image is loaded it will provision the commands on bootstrap.sh
   * Could take some time the first time.
 4. To ssh into your dev environment type: vagrant ssh
-5. python nimbble/manage.py migrate
+5. When you ssh into the VM some scripts will run and finish insalling dependencies. Your viertual enviroment will be automatically setup. Your prompt should look like this:
+  * (nimbble-dev)vagrant@vagrant-ubuntu-trusty-64:/nimbble-dev$
+6. The first time you ssh you will need to run:
+  * pip install -r requirements/local.txt
+7. python nimbble/manage.py migrate
 8. grunt serve
 9. From your host machine you can now:
   * Browse to http://localhost:8000/
