@@ -27,7 +27,7 @@ Development Environment with Vagrant
 8. grunt serve
 9. From your host machine you can now:
   * Browse to http://localhost:8000/
-  * Edit your files with your favorite EDI.
+  * Edit your files with your favorite IDE.
 
 ### Notes:
 
