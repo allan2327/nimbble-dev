@@ -25,6 +25,9 @@ Development Environment with Vagrant
 4. To ssh into your dev environment type: vagrant ssh
 5. python nimbble/manage.py migrate
 8. grunt serve
+9. From your host machine you can now:
+  * Browse to http://localhost:8000/
+  * Edit your files with your favorite EDI.
 
 ### Notes:
 
