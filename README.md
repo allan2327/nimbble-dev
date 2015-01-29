@@ -18,7 +18,7 @@ Development Environment with Vagrant
 1. Clone repo
 2. Navigate to repo folder.
   * cd nimbble-dev
-3. type: vagrant up
+3. type: vagrant up 
   * This will download the image if it is the first time it is ran.
   * After the image is loaded it will provision the commands on bootstrap.sh
   * Could take some time the first time.
@@ -32,6 +32,7 @@ Development Environment with Vagrant
 9. From your host machine you can now:
   * Browse to http://localhost:8000/
   * Edit your files with your favorite IDE.
+  * You can also run **grunt reload** from host and install [this chrome extention](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei) so the browser reloads automagically.
 
 ### Notes:
 
