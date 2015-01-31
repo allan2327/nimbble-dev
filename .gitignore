@@ -63,3 +63,5 @@ notes.txt
 
 /node_modules
 *.sqlite3
+
+.sass-cache/
