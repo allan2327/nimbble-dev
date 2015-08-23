@@ -7,6 +7,11 @@ from .models import AuthorizedEmail
 
 class BasicEmailAccountAdapter(DefaultAccountAdapter):
 
+    def new_user(self, request):
+        user = super(BasicEmailAccountAdapter, self).new_user(request)
+        return user
+
+
     def clean_email(self, email):
 
         postfix = email[email.index('@')+1:]
@@ -15,5 +20,3 @@ class BasicEmailAccountAdapter(DefaultAccountAdapter):
             return email
 
         raise forms.ValidationError(_("Invalid email. Please make sure your company has a nimbble account."))
-
-

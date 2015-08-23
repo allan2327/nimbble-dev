@@ -78,7 +78,7 @@ module.exports = function (grunt) {
     // see: https://npmjs.org/package/grunt-bg-shell
     bgShell: {
       _defaults: {
-        bg: true
+        bg: false
       },
       runDjango: {
         cmd: 'python <%= paths.manageScript %> runserver 0.0.0.0:8000'

@@ -48,7 +48,9 @@ class Common(Configuration):
     LOCAL_APPS = (
         'users',  # custom users app
         # Your stuff: custom apps go here
+        'nimbble',
         'authutils',
+        'rest_framework',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -86,7 +88,7 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
     # Note: This key only used for development and testing.
     #       In production, this is changed to a values.SecretValue() setting
-    SECRET_KEY = 'CHANGEME!!!'
+    SECRET_KEY = '12345'
     # END SECRET CONFIGURATION
 
     # FIXTURE CONFIGURATION
@@ -224,6 +226,8 @@ class Common(Configuration):
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
     ACCOUNT_ADAPTER = "authutils.adapter.BasicEmailAccountAdapter"
+    ACCOUNT_SIGNUP_FORM_CLASS = "authutils.forms.NimbbleSignupForm"
+
     # END AUTHENTICATION CONFIGURATION
 
     # Custom user app defaults
