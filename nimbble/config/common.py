@@ -42,6 +42,7 @@ class Common(Configuration):
         'allauth',  # registration
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
+        'pipeline', # For asset packaging
     )
 
     # Apps specific for this project go here.
@@ -49,6 +50,7 @@ class Common(Configuration):
         'users',  # custom users app
         # Your stuff: custom apps go here
         'nimbble',
+        'ui',
         'authutils',
         'rest_framework',
     )
@@ -197,7 +199,10 @@ class Common(Configuration):
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'pipeline.finders.PipelineFinder',
     )
+
+    #STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
     # END STATIC FILE CONFIGURATION
 
     # MEDIA CONFIGURATION
@@ -272,6 +277,33 @@ class Common(Configuration):
         }
     }
     # END LOGGING CONFIGURATION
+
+    # PIPELINE
+    PIPELINE_CSS = {
+        'application': {
+            'source_filenames': (
+              'css/*.css',
+            ),
+            'output_filename': 'css/application.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    }
+
+    PIPELINE_JS = {
+        'stats': {
+            'source_filenames': (
+              'js/jquery.js',
+              'js/d3.js',
+              'js/collections/*.js',
+              'js/application.js',
+            ),
+            'output_filename': 'js/stats.js',
+        }
+    }
+
+    #END PIPELINE
 
     @classmethod
     def post_setup(cls):

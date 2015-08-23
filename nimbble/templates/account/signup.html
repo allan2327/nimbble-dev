@@ -5,22 +5,32 @@
 {% load crispy_forms_tags %}
 
 {% block title %}{% trans "Signup" %}{% endblock title %}
+{% block sidebar %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<!--header class="header">
+  <h1>
+    Please Login/Signup
+    <small>Welcome to the nimbble demo.</small>
+  </h1>
+</header-->
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button class="btn" type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 login-wrapper">
+      <div class="card login-box">
+          <form role="form" action="{% url 'account_signup' %}" method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="btn btn-lg btn-primary btn-block btn-ghost" type="submit">{% trans "Sign Up" %} &raquo;</button>
+          <p>{% blocktrans %}Already have an account? <a href="{{ login_url }}">Log in here.</a>{% endblocktrans %}</p>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
-
-

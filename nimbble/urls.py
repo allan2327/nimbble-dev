@@ -11,9 +11,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',  # noqa
-        TemplateView.as_view(template_name='pages/home.html'),
-        name="home"),
+    #url(r'^$',  # noqa
+    #    TemplateView.as_view(template_name='pages/home.html'),
+    #    name="home"),
     url(r'^about/$',
         TemplateView.as_view(template_name='pages/about.html'),
         name="about"),
@@ -31,5 +31,6 @@ urlpatterns = patterns('',
 
     # Your stuff: custom urls go here
     url(r'^api/v0/', include('nimbble.urls')),
+    url(r'', include('ui.urls', namespace='ui')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

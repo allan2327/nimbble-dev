@@ -65,3 +65,7 @@ notes.txt
 *.sqlite3
 
 .sass-cache/
+.idea/
+staticfiles/
+.sass-cache/
+

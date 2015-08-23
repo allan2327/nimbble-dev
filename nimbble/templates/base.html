@@ -1,87 +1,72 @@
 {% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}nimbble{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    {% block css %}
+    <title>Nimbble</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <!--link href="/static/bstrap/css/bootstrap.min.css" rel="stylesheet"-->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
-    <!-- Your stuff: Third-party css libraries go here -->
-
-    <!-- This file store project specific CSS -->
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    {% endblock %}
-
-    {% block angular %}
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    {% endblock %}
-
+    {% load pipeline %}
+    {% stylesheet 'application' %}
+    {% block css %} {% endblock %}
   </head>
-
   <body>
-
-    <div class="header navbar">
-      <div class="container">
-        <a class="navbar-brand" href="/">nimbble</a>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-
+    <div id="wrap">
+      {% block sidebar %}
+      <aside class="sidebar">
+        <ul class="navigation">
           {% if request.user.is_authenticated %}
-            <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-            <li><a href="{% url 'account_logout' %}">{% trans "Logout" %}</a></li>
-          {% else %}
-            <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-            <li><a href="{% url 'account_login' %}">{% trans "Log In" %}</a></li>
+          <!--li class="logo { firstof request.home %}">
+            <a href="{ url webui:main_employee %}">Home</a>
+          </li>
+          <li class="feed { firstof request.home %}">
+            <a href="{ url webui:main_employee %}">Activity</a>
+          </li>
+          <li Class="stats { firstof request.stats %}">
+            <a href="{ url webui:stats %}">Stats</a>
+          </li>
+          <li class="trackers { firstof request.trackers %}">
+            <a href="{ url webui:trackers %}">Trackers</a>
+          </li>
+          <li class="">
+            <a href="{ url webui:logout %}">logout</a>
+        </li-->
+          <li class="user">
+            <div class="img-wrapper">
+              <div class="hex-badge small">{{ request.user.points|floatformat:0 }}</div>
+              <img class="profile-image medium" src="{{ request.user.picture }}"></img>
+            </div>
+            <a href="{% url 'ui:feed' %}" class="employee">{{ request.user.username }}</a>
+            <!--a href="{ url webui:group %}" class="dept">{{ request.user.group }}</a-->
+          </li>
           {% endif %}
         </ul>
+      </aside>
+      {% endblock %}
+      <div id="content">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %} {% endblock %}
       </div>
     </div>
 
-    <div class="container">
-        
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+    {% csrf_token %}
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-
-    </div> <!-- /container -->
-    
-    {% block modal %}{% endblock modal %}
-
-    <!-- Le javascript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-      <!-- Latest JQuery -->
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-      <!-- Your stuff: Third-party javascript libraries go here -->
-
-      <!-- place project specific Javascript in this file -->
-      <script src="{% static 'js/project.js' %}"></script>
-    {% endblock javascript %}
+    {% block scripts %} {% endblock %}
+    {% block templates %} {% endblock %}
   </body>
 </html>
- 

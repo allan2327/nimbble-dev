@@ -1,0 +1,83 @@
+
+.card svg { width: 100%; }
+.ui-weekly-indicator svg { width: 100%; }
+
+.bar { 
+  fill: #364053; 
+  transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+
+.bar:hover { fill: #e74c3c;}
+
+.axis {
+  font-family: Lato,Helvetica,Arial,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+  fill: #666;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path { display: none; }
+
+.tick.minor line{
+  stroke: #ecf2f6;
+  stroke-width: 1;
+  stroke-dasharray: 0,0;
+}
+
+.ui-over-goal{ fill: #1ab394; }
+.ui-goal { stroke-width: 1px; stroke: #1ab394; stroke-dasharray: 5,5; }
+
+.brush rect.extent {
+  fill: #e74c3c;
+  fill-opacity: .25;
+}
+
+.brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+.stat-box { padding: 20px; }
+
+.stat-box h1,
+.stat-box h3 {
+  padding: 0;
+  margin: 0;
+  display: block;
+  text-align: center;
+}
+
+.stat-box h1 small { display: block; }
+
+.stat-box h3 {
+  margin-top: 5px;
+  text-transform: uppercase;
+  color: #ccc;
+}
+
+.stat-box .positive{ color: #1ab394; }
+.stat-box .negative{ color: #c93744; }
+
+.card.date { margin-top: 20px; }
+
+
+.card.date h2.day { 
+  padding: 15px;
+  margin: 0;
+  display: block;
+  background: #f7f7f7;
+  border-bottom: 1px solid #f3f3f3;
+}
+
