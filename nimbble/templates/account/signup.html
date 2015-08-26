@@ -5,8 +5,21 @@
 {% load crispy_forms_tags %}
 
 {% block title %}{% trans "Signup" %}{% endblock title %}
-{% block sidebar %}{% endblock %}
-
+{% block sidebar %}
+<aside class="sidebar">
+  <ul class="navigation">
+    <li class="logo">
+      <a href="{ url 'home' %}">Home</a>
+    </li>
+    <li class="">
+      <a href="{% url 'account_login' %}">Login</a>
+    </li>
+    <li class="active">
+      <a href="#">Signup</a>
+    </li>
+  </ul>
+</aside>
+{% endblock %}
 {% block content %}
 <!--header class="header">
   <h1>
@@ -26,7 +39,7 @@
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
           <button class="btn btn-lg btn-primary btn-block btn-ghost" type="submit">{% trans "Sign Up" %} &raquo;</button>
-          <p>{% blocktrans %}Already have an account? <a href="{{ login_url }}">Log in here.</a>{% endblocktrans %}</p>
+          <!--p>{% blocktrans %}Already have an account? <a href="{{ login_url }}">Log in here.</a>{% endblocktrans %}</p-->
       </form>
     </div>
     </div>

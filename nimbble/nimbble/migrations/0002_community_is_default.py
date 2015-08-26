@@ -11,9 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.AddField(
             model_name='community',
-            name='name',
-            field=models.CharField(unique=True, max_length=100),
+            name='is_default',
+            field=models.BooleanField(default=False),
+            preserve_default=True,
         ),
     ]

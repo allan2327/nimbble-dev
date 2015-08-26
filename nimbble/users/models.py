@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 class User(AbstractUser):
 
     points = models.FloatField(default=0)
-    picture_url = models.CharField(max_length=256)
+    picture_url = models.CharField(max_length=256, default='/static/images/128.png')
 
     def __unicode__(self):
         return self.username

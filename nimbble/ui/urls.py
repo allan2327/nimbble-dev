@@ -5,6 +5,6 @@ from ui import views
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('ui.views',
-    url(r'', views.SignInRedirect.as_view(), name='home'),   
+    url(r'', TemplateView.as_view(template_name='pages/home.html'), name='home'),   
     url(r'^feed/$', views.FeedView.as_view(), name='feed'),
 )

@@ -10,4 +10,7 @@ class AuthorizedEmail(models.Model):
     email_postfix = models.CharField(max_length=128)
 
     def __unicode__(self):
-        return self.username
+        return self.email_postfix
+
+    def __str__(self):
+        return self.email_postfix

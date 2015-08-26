@@ -43,6 +43,8 @@ class Common(Configuration):
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
         'pipeline', # For asset packaging
+        'allauth.socialaccount.providers.google',
+        'allauth.socialaccount.providers.facebook',
     )
 
     # Apps specific for this project go here.
@@ -157,8 +159,6 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
-        'allauth.account.context_processors.account',
-        'allauth.socialaccount.context_processors.socialaccount',
         'django.core.context_processors.debug',
         'django.core.context_processors.i18n',
         'django.core.context_processors.media',
@@ -227,7 +227,8 @@ class Common(Configuration):
     )
 
     # Some really nice defaults
-    ACCOUNT_AUTHENTICATION_METHOD = 'username'
+    ACCOUNT_AUTHENTICATION_METHOD = 'email'
+    ACCOUNT_USERNAME_REQUIRED = False
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
     ACCOUNT_ADAPTER = "authutils.adapter.BasicEmailAccountAdapter"
@@ -294,16 +295,31 @@ class Common(Configuration):
     PIPELINE_JS = {
         'stats': {
             'source_filenames': (
-              'js/jquery.js',
-              'js/d3.js',
-              'js/collections/*.js',
-              'js/application.js',
+              'js/project.js',
             ),
             'output_filename': 'js/stats.js',
         }
     }
 
     #END PIPELINE
+
+    #SOCIAL accounts
+
+    SOCIALACCOUNT_PROVIDERS = \
+        {'facebook': {
+            'SCOPE': ['email', 'public_profile', 'user_hometown', 'user_location'],
+            'METHOD': 'js_sdk',
+            'AUTH_PARAMS': {'auth_type': ''},
+            'FIELDS':['id','email','name','first_name','last_name','verified','link','picture.width(128).height(128)', 'hometown', 'location'],
+            'EXCHANGE_TOKEN': True,
+            'LOCALE_FUNC': lambda request: 'en_US',
+            'VERSION': 'v2.4'},
+        'google':{
+            'SCOPE': ['profile', 'email'],
+            'AUTH_PARAMS': { 'access_type': 'online' }}
+        }
+
+    #END SOCIAL ACCOUNTS
 
     @classmethod
     def post_setup(cls):

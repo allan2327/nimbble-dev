@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_remove_user_name'),
+        ('users', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='user',
-            name='points',
-            field=models.FloatField(default=0),
+            name='picture_url',
+            field=models.CharField(default='/static/images/128.png', max_length=256),
         ),
     ]

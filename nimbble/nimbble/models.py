@@ -10,6 +10,7 @@ class Community(models.Model):
     state = models.CharField(max_length=100, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     members = models.ManyToManyField(User, related_name="communities")
+    is_default = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('created',)

@@ -4,25 +4,42 @@
 {% load account %}
 {% load url from future %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 
 {% block head_title %}{% trans "Log In" %}{% endblock %}
-{% block sidebar %}{% endblock %}
+
+{% block scripts %} {% providers_media_js %} {% endblock %}
+
+{% block sidebar %}
+<aside class="sidebar">
+  <ul class="navigation">
+    <li class="logo">
+      <a href="{ url 'home' %}">Home</a>
+    </li>
+    <li class="active">
+      <a href="#">Login</a>
+    </li>
+    <li class="">
+      <a href="{% url 'account_signup' %}">Signup</a>
+    </li>
+  </ul>
+</aside>
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12 login-wrapper">
       <div class="card login-box">
-          <h2>{% trans "Nimbble" %}</h2>
-
-          {% if socialaccount.providers  %}
+          <a href="{% provider_login_url "facebook" %}">facebook</a>
+          {% if socialaccount_providers  %}
           <p>{% blocktrans with site.name as site_name %}Please sign in with one
           of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
           for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
           <div class="socialaccount_ballot">
             <ul class="socialaccount_providers">
-              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+              {{ socialaccount_providers }}
             </ul>
             <div class="login-or">{% trans 'or' %}</div>
           </div>
@@ -37,8 +54,7 @@
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
             <button class="btn btn-lg btn-primary btn-block btn-ghost" type="submit">{% trans "Sign In" %}</button>
-            <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-            <p>{% blocktrans %}Dont have an account? {% endblocktrans %}<a href="{% url 'account_signup' %}">Sign up here!</a></p>
+            <!--a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a-->
           </form>
       </div>
     </div>
