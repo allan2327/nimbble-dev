@@ -30,9 +30,15 @@ class FitnessTracker(models.Model):
         ordering=('name',)
 
 
-class AuthTracker(models.Model):
-    user = models.ForeignKey(User, related_name='trackers')
-    tracker = models.ForeignKey(FitnessTracker, related_name='authentications')
+class FitnessTrackerAccount(models.Model):
+    tracker = models.OneToOneField(FitnessTracker, related_name='account')
+    app_id = models.CharField(max_length=32, blank=False)
+    app_secret = models.CharField(max_length=64, blank=False)
+
+
+class FitnessTrackerToken(models.Model):
+    user = models.ForeignKey(User, related_name='tokens')
+    tracker = models.ForeignKey(FitnessTracker, related_name='tokens')
     token = models.CharField(max_length=256, blank=False)
 
     class Meta:

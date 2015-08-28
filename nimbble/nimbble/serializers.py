@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.fields import empty
-from nimbble.models import Community, FitnessTracker, AuthTracker
+from nimbble.models import Community, FitnessTracker, FitnessTrackerToken
 
 
 class CommunitySerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class UserTrackerSerializer(serializers.ModelSerializer):
     active = serializers.SerializerMethodField('get_active_status')
 
     def get_active_status(self, tracker):
-        return AuthTracker.objects.filter(user=self.user, tracker=tracker).exists()
+        return FitnessTrackerToken.objects.filter(user=self.user, tracker=tracker).exists()
 
     class Meta:
         model = FitnessTracker

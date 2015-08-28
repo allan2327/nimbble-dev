@@ -1,17 +1,15 @@
 from django.test import TestCase
-from nimbble.models import FitnessTracker, AuthTracker
+from nimbble.models import FitnessTracker, FitnessTrackerAccount, FitnessTrackerToken
 from users.models import User
 from nimbble.serializers import UserTrackerSerializer
 # Create your tests here.
 
 
-class UserTrackerSerializerTestCase(TestCase):
+class UserTrackerSerializerTest(TestCase):
     def setUp(self):
-        self.user = User(username='test1')
-        self.tracker = FitnessTracker(name='strava')
+        self.user = User.objects.create(username='test1')
+        self.tracker = FitnessTracker.objects.create(name='strava')
         self.serializer = UserTrackerSerializer(self.tracker, user=self.user)
-        self.user.save()
-        self.tracker.save()
 
 
     def test_meta_has_correct_model(self):
@@ -25,20 +23,56 @@ class UserTrackerSerializerTestCase(TestCase):
 
 
     def test_get_active_status_user_has_auth_tracker(self):
-        auth_tracker = AuthTracker(user=self.user, tracker=self.tracker)
-        auth_tracker.save()
-
+        FitnessTrackerToken.objects.create(user=self.user, tracker=self.tracker)
         active = self.serializer.get_active_status(self.tracker)
-
         self.assertTrue(active)
 
 
     def test_get_active_status_user_does_not_have_auth_tracker(self):
-        tracker2 = FitnessTracker(name='other-tracker')
-        tracker2.save()
-        auth_tracker = AuthTracker(user=self.user, tracker=tracker2)
-        auth_tracker.save()
+        tracker2 = FitnessTracker.objects.create(name='other-tracker')
+        FitnessTrackerToken.objects.create(user=self.user, tracker=tracker2)
 
         active = self.serializer.get_active_status(self.tracker)
 
         self.assertFalse(active)
+
+
+
+class SimpleTrackerFlowTest(TestCase):
+
+    def setUp(self):
+        pass
+
+
+    def test_workflow(self):
+        strava = FitnessTracker.objects.create(name='strava', icon_url='stv.png', tracker_link='strava.com')
+
+        strava_acc = FitnessTrackerAccount.objects.create(tracker=strava, app_id='24341', app_secret='asdfoernwer234fo234n23kln23')
+
+        user1 = User.objects.create(username='testuser1')
+        user2 = User.objects.create(username='testuser2')
+
+        token1 = FitnessTrackerToken.objects.create(user=user1, tracker=strava, token='h23h23k4j2o3k4j')
+        token2 = FitnessTrackerToken.objects.create(user=user2, tracker=strava, token='jkl32j4l23kj4o2')
+
+        self.assertTrue(True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def somethin(self):
+        pass

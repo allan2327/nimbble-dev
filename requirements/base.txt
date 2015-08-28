@@ -32,3 +32,4 @@ pytz==2014.10
 # Your custom requirements go here
 djangorestframework==3.2
 django-pipeline==1.5.3
+stravalib

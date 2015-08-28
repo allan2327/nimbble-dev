@@ -5,6 +5,7 @@ from ui import views
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('ui.views',
-    url(r'', TemplateView.as_view(template_name='pages/home.html'), name='home'),   
+    url(r'', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^feed/$', views.FeedView.as_view(), name='feed'),
+    url(r'^auth/(?P<tracker_name>[A-Za-z]+)/$', views.auth_handler, name='tracker_auth'),
 )
