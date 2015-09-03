@@ -7,7 +7,7 @@ TRACKERS = {
             'tracker_link': 'http://strava.com',
         },
         'account':{
-            'client_id': 3440
+            'app_id': 3440
         }
     }
 }

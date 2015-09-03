@@ -29,11 +29,17 @@ class FitnessTracker(models.Model):
     class Meta:
         ordering=('name',)
 
+    def __str__(self):
+        return self.name
+
 
 class FitnessTrackerAccount(models.Model):
     tracker = models.OneToOneField(FitnessTracker, related_name='account')
     app_id = models.CharField(max_length=32, blank=False)
     app_secret = models.CharField(max_length=64, blank=False)
+
+    def __str__(self):
+        return '{} Account'.format(self.tracker.name)
 
 
 class FitnessTrackerToken(models.Model):
@@ -43,3 +49,6 @@ class FitnessTrackerToken(models.Model):
 
     class Meta:
         unique_together = ('user', 'tracker',)
+
+    def __str__(self):
+        return 'Token for {}:{}'.format(self.tracker.name, self.user.username)
