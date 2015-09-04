@@ -12,7 +12,7 @@ class CommunitySerializer(serializers.ModelSerializer):
 class TrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = FitnessTracker
-        fields = ('id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link', 'active')
+        fields = ('id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link')
 
 
 class UserTrackerSerializer(serializers.ModelSerializer):

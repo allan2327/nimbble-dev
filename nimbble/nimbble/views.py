@@ -25,5 +25,5 @@ class UserTrackerList(APIView):
         user = request.user
         trackers = FitnessTracker.objects.all()
 
-        serializer = TrackerSerializer(trackers, many=True, user=user)
+        serializer = UserTrackerSerializer(trackers, many=True, user=user)
         return Response(serializer.data)

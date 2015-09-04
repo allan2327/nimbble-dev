@@ -32,7 +32,7 @@
             <a href="{ url webui:stats %}">Stats</a>
           </li>
           <li class="trackers { firstof request.trackers %}">
-            <a href="{ url webui:trackers %}">Trackers</a>
+            <a href="{% url 'ui:trackers' %}">Trackers</a>
           </li>
           <li class="">
             <a href="{% url 'account_logout' %}">logout</a>

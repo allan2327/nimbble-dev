@@ -305,19 +305,20 @@ class Common(Configuration):
 
     #SOCIAL accounts
 
-    SOCIALACCOUNT_PROVIDERS = \
-        {'facebook': {
-            'SCOPE': ['email', 'public_profile', 'user_hometown', 'user_location'],
-            'METHOD': 'js_sdk',
-            'AUTH_PARAMS': {'auth_type': ''},
-            'FIELDS':['id','email','name','first_name','last_name','verified','link','picture.width(128).height(128)', 'hometown', 'location'],
-            'EXCHANGE_TOKEN': True,
-            'LOCALE_FUNC': lambda request: 'en_US',
-            'VERSION': 'v2.4'},
-        'google':{
-            'SCOPE': ['profile', 'email'],
-            'AUTH_PARAMS': { 'access_type': 'online' }}
-        }
+    SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'public_profile', 'user_hometown', 'user_location'],
+        'METHOD': 'js_sdk',
+        'AUTH_PARAMS': {'auth_type': ''},
+        'FIELDS':['id','email','name','first_name','last_name','verified','link','picture.width(128).height(128)', 'hometown', 'location'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERSION': 'v2.4'
+    },
+    'google':{
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': { 'access_type': 'online' }}
+    }
 
     #END SOCIAL ACCOUNTS
 

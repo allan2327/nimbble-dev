@@ -12,8 +12,21 @@ def auth_handler():
     pass
 
 class FeedView(LoginRequiredMixin, TemplateView):
-    template_name = 'home.html'
+    template_name = 'pages/home.html'
 
+class TrackersView(LoginRequiredMixin, TemplateView):
+    template_name = 'ui/trackers.html'
+
+    def get_context_data(self, **kwargs):
+        trackers = self.get_trackers()
+        return { 'trackers': trackers }
+
+    def get_trackers(self):
+        return [
+            { 'name': 'strava1', 'icon_url': '/static/images/128.png', 'tracker_link': 'http://google.com', 'description': 'descr' },
+            { 'name': 'strava2', 'icon_url': '/static/images/128.png', 'tracker_link': 'http://google.com', 'description': 'descr' },
+            { 'name': 'strava3', 'icon_url': '/static/images/128.png', 'tracker_link': 'http://google.com', 'description': 'descr' },
+        ]
 
 class SignInRedirect(RedirectView):
     permanent = False
