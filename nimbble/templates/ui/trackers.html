@@ -3,13 +3,14 @@
 {% block content %}
 <header class="header">
   <h1>
-    Available Fitness Trackers <em>for</em> <strong>Infinite Energy</strong>
+    Fitness Trackers <em>for</em> <strong>Infinite Energy</strong>
     <!--small>Showing activity for <strong>{{ group_name }}</strong></small-->
   </h1>
 </header>
 <div class="container-fluid">
+    {% include 'messages.html' %}
     <div class="row">
-        <div class="col-md-6 margin-top">
+        <div class="col-md-6">
             <div class="card margin-top">
                 <ul class="feed action-space-right">
                     {% for tracker in trackers %}

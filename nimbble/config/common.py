@@ -55,6 +55,8 @@ class Common(Configuration):
         'ui',
         'authutils',
         'rest_framework',
+        'nimbble.fitnessaccount.strava',
+        'nimbble.fitnessaccount.fitbit',        
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
