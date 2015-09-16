@@ -3,5 +3,9 @@
   <img class="profile-image small" src="{{ tracker.icon_url }}"></img>
   <h4 class="name"><a href="{{ tracker.tracker_link }}" target="_blank">{{ tracker.name|title }}</a></h4>
   <span class="description">{{ tracker.description }}</span>
-  <a class="btn action btn-sm btn-primary btn-ghost" href="{{ tracker.auth_url }}">ACTIVATE</a>
+  {% if tracker.active %}
+    <a class="btn action btn-sm btn-primary btn-ghost" href="#">DEACTIVATE</a>
+  {% else %}
+    <a class="btn action btn-sm btn-primary btn-ghost" href="{{ tracker.auth_url }}">ACTIVATE</a>
+  {% endif %}
 </li>

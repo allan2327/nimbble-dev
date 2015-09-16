@@ -21,8 +21,8 @@ class Community(models.Model):
 class FitnessTracker(models.Model):
     name = models.CharField(max_length=100, blank=False, unique=True)
     description = models.TextField()
-    icon_url = models.CharField(max_length=100)
-    tracker_link = models.URLField(max_length=100)
+    icon_url = models.CharField(max_length=150)
+    tracker_link = models.URLField(max_length=150)
     auth_url = models.URLField(max_length=512)
     created = models.DateTimeField(auto_now_add=True)
 

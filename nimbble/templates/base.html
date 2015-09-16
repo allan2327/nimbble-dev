@@ -40,7 +40,7 @@
           <li class="user">
             <div class="img-wrapper">
               <div class="hex-badge small">{{ request.user.points|floatformat:0 }}</div>
-              <img class="profile-image medium" src="{{ request.user.picture_url }}"></img>
+              <img class="profile-image circle medium" src="{{ request.user.picture_url }}"></img>
             </div>
             <a href="{% url 'ui:feed' %}" class="employee">{{ request.user.username }}</a>
             <!--a href="{ url webui:group %}" class="dept">{{ request.user.group }}</a-->

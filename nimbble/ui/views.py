@@ -10,10 +10,6 @@ from braces.views import LoginRequiredMixin
 from nimbble.models import FitnessTracker
 from nimbble.serializers import UserTrackerSerializer
 
-def auth_handler():
-    pass
-
-
 class FeedView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/home.html'
 

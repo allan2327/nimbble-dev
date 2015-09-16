@@ -56,7 +56,7 @@ class Common(Configuration):
         'authutils',
         'rest_framework',
         'nimbble.fitnessaccount.strava',
-        'nimbble.fitnessaccount.fitbit',        
+        'nimbble.fitnessaccount.fitbit',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -145,7 +145,7 @@ class Common(Configuration):
     LANGUAGE_CODE = 'en-us'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-    SITE_ID = 2
+    SITE_ID = 4
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
     USE_I18N = True

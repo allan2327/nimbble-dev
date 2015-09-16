@@ -49,7 +49,7 @@ class StravaConfigTest(TestCase):
 
             StravaConfig().post_add(tracker, acc)
 
-            mock_reverse.assert_called_with('ui:tracker_auth', kwargs={'tracker_name': 'strava'})
+            mock_reverse.assert_called_with('strava_token_login')
 
     @patch('nimbble.dbconfig.trackers.reverse')
     @patch('nimbble.dbconfig.trackers.Client.authorization_url')

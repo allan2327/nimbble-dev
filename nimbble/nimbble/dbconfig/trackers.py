@@ -19,7 +19,7 @@ class TrackerConfigFactory:
 class StravaConfig(object):
     def post_add(self, tracker, acct):
         current_site = Site.objects.get_current()
-        redirect_url = '{}{}'.format(current_site.domain, reverse('ui:tracker_auth', kwargs={'tracker_name': 'strava'}))
+        redirect_url = '{}{}'.format(current_site.domain, reverse('strava_token_login'))
         tracker.auth_url = Client().authorization_url(client_id=acct.app_id, redirect_uri=redirect_url)
         tracker.save()
 
@@ -30,7 +30,6 @@ class StravaConfig(object):
 class CustomFitnessTrackerMigration(object):
 
     def import_tracker_info(self):
-        import pdb; pdb.set_trace()
         for name in TRACKERS:
             print('importing {}'.format(name))
             self.add_tracker(name, TRACKERS[name])

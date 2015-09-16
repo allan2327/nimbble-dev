@@ -8,17 +8,21 @@ class CommunityList(generics.ListCreateAPIView):
     queryset = Community.objects.all()
     serializer_class = CommunitySerializer
 
+
 class CommunityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Community.objects.all()
     serializer_class = CommunitySerializer
+
 
 class TrackerList(generics.ListCreateAPIView):
     queryset = FitnessTracker.objects.all()
     serializer_class = TrackerSerializer
 
+
 class TrackerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = FitnessTracker.objects.all()
     serializer_class = TrackerSerializer
+
 
 class UserTrackerList(APIView):
     def get(self, request, format=None):
