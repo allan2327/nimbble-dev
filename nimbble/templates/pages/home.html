@@ -1,1 +1,24 @@
 {% extends "base.html" %}
+
+{% block content %}
+<header class="header">
+  <h1>
+    Fitness Trackers <em>for</em> <strong>Infinite Energy</strong>
+    <!--small>Showing activity for <strong>{{ group_name }}</strong></small-->
+  </h1>
+</header>
+<div class="container-fluid">
+    {% include 'messages.html' %}
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card margin-top">
+                <ul class="feed action-space-right">
+                    {% for activity in activity_feed %}
+                        {% include "ui/activity_row.html" %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

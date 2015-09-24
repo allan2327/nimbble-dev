@@ -1,12 +1,12 @@
 from django.test import TestCase
 from users.models import User
 from allauth.socialaccount.models import SocialAccount
-from users.signalhandlers import FbSignalHandler
+from .receivers import FbSignalReceiver
 
 class FbSignalHandlerTest(TestCase):
 
     def setUp(self):
-        self.handler = FbSignalHandler()
+        self.handler = FbSignalReceiver()
         self.user = User.objects.create_user(
             username='testuser', email='tuser@gmail.com', password='psw'
         )

@@ -17,6 +17,7 @@ class TokenHandler(object):
 
         nimbble_token.token = sv_token
         nimbble_token.save()
+        return nimbble_token
 
     def get_token_from_code(self, code):
         tracker = FitnessTracker.objects.get(name='strava')
@@ -29,15 +30,16 @@ class TokenHandler(object):
 class StravaTokenRedirectView(LoginRequiredMixin, View):
 
     def get(self, request, *arg, **kwargs):
-        try:
-            user = request.user
-            code = request.GET.get('code', '')
+        #try:
+        user = request.user
+        code = request.GET.get('code', '')
 
-            TokenHandler().add_fitness_token(user, code)
+        nimbble_token = TokenHandler().add_fitness_token(user, code)
 
-            strava_activated.send(sender=request, nimbble_token=nimbble_token)
-            messages.success(request, '{} Fitness tracker has been successfully activated.'.format('Strava'))
-        except Exception:
-            messages.error(request, '{} Fitness tracker was not successfully activated.'.format('Strava'))
-
+        strava_activated.send(sender=request, nimbble_token=nimbble_token)
+        messages.success(request, '{} Fitness tracker has been successfully activated.'.format('Strava'))
         return redirect('ui:trackers')
+        #except Exception:
+        #    messages.error(request, '{} Fitness tracker was not successfully activated.'.format('Strava'))
+
+        #return redirect('ui:trackers')

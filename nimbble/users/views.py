@@ -16,16 +16,6 @@ from .forms import UserForm
 
 # Import the customized User model
 from .models import User
-from .signalhandlers import FbSignalHandler
-
-from django.dispatch import receiver
-from allauth.account.signals import user_signed_up
-
-@receiver(user_signed_up)
-def set_additional_values(sender, **kwargs):
-    user = kwargs.pop('user')
-
-    FbSignalHandler().new_user(user)
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

@@ -67,6 +67,7 @@ class TestStravaTokenRedirectView(TestCase):
 
     @patch('nimbble.fitnessaccount.strava.views.redirect')
     @patch('nimbble.fitnessaccount.strava.views.messages')
+    @patch('nimbble.fitnessaccount.strava.views.strava_activated')
     @patch('nimbble.fitnessaccount.strava.views.TokenHandler.add_fitness_token')
     def test_get_adds_fitness_tracker(self, mock_token_handler, *args):
 

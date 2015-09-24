@@ -9,9 +9,15 @@ from django.views.generic import TemplateView, RedirectView
 from braces.views import LoginRequiredMixin
 from nimbble.models import FitnessTracker
 from nimbble.serializers import UserTrackerSerializer
+from nimbble.utils import get_current_community
 
 class FeedView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/home.html'
+
+    def get_context_data(self, **kwargs):
+        comm = get_current_community(self.request)
+        #activities =
+        #serializer = CommunityFeedSerializer()
 
 
 class TrackersView(LoginRequiredMixin, TemplateView):
