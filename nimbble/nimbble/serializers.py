@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from rest_framework.fields import empty
-from nimbble.models import Community, FitnessTracker, FitnessTrackerToken
+from nimbble.models import Community, FitnessTracker, FitnessActivity, FitnessTrackerToken
+from users.models import User
+
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'picture_url', 'points', 'username',)
 
 
 class CommunitySerializer(serializers.ModelSerializer):
@@ -14,6 +20,18 @@ class TrackerSerializer(serializers.ModelSerializer):
         model = FitnessTracker
         fields = ('id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link')
 
+
+class ActivitySerializer(serializers.ModelSerializer):
+
+    user = serializers.SerializerMethodField('get_user_data')
+
+    def get_user_data(self, activity):
+        user_ser = SimpleUserSerializer(activity.user)
+        return user_ser.data
+
+    class Meta:
+        model = FitnessActivity
+        fields = ('user','source_id','source_name','activity_type','average_watts','distance','moving_time','score','created',)
 
 class UserTrackerSerializer(serializers.ModelSerializer):
 
