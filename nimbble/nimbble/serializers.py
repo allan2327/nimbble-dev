@@ -6,7 +6,7 @@ from users.models import User
 class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'picture_url', 'points', 'username',)
+        fields = ('id', 'picture_url', 'points', 'username', 'first_name')
 
 
 class CommunitySerializer(serializers.ModelSerializer):

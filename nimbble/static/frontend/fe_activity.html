@@ -1,0 +1,20 @@
+<!-- activity_row.html -->
+
+  <img class="profile-image small circle" src="{{ user.picture_url }}"></img>
+  <h4 class="user"><a href="{{ user.link }}">{{ user.first_name }}</a>, </h4>
+  <!-- a href="{ url webui:group activity.user.group %}">{{ activity.user.group }}</a -->
+  <span class="date">- {{ datetime }}</span>
+  <ul class="stats">
+    <li>
+      <div class="value">{{ activity_type }}</div>
+      <div class="name"><a href="{{ source_url }}" target="_blank">{{ source_name }}</a></div>
+    </li>
+    <li>
+      <div class="value">{{ distance }} mi</div>
+      <div class="name">Distance</div>
+    </li>
+    <li>
+      <div class="value">{{ duration_str }}</div>
+      <div class="name">Duration</div>
+    </li>
+  </ul>

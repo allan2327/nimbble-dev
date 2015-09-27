@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
+{% load staticfiles i18n %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -15,6 +15,8 @@
     {% load pipeline %}
     {% stylesheet 'application' %}
     {% block css %} {% endblock %}
+
+      {% block scripts %} {% endblock %}
   </head>
   <body>
     <div id="wrap">
@@ -60,7 +62,12 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    {% block scripts %} {% endblock %}
-    {% block templates %} {% endblock %}
+    {% block templates %}
+        {% filter addslashes %}
+        <div id="templates">
+        {% include 'ui/fe_activity.html' %}
+        </div>
+        {% endfilter %}
+    {% endblock %}
   </body>
 </html>

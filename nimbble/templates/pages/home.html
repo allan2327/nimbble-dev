@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+    <script type="text/javascript" data-main="/static/js/main" src="/static/js/libs/require.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <header class="header">
   <h1>
@@ -11,11 +15,12 @@
     {% include 'messages.html' %}
     <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
-            <div class="card margin-top">
+            <div id="feed-container" class="card margin-top" data-parent-id="{{ parent_id }}">
                 <ul class="feed action-space-right">
-                    {% for activity in activity_feed %}
-                        {% include "ui/activity_row.html" %}
-                    {% endfor %}
+                    <li id="empty" class="empty-set">
+                      <img class="profile-image small" src="/static/images/snail.png"></img>
+                      <p><strong>Oops!</strong> No activity found.</p>
+                    </li>
                 </ul>
             </div>
         </div>

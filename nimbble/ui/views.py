@@ -16,8 +16,8 @@ class FeedView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         comm = get_current_community(self.request)
-        #activities =
-        #serializer = CommunityFeedSerializer()
+
+        return { 'parent_id': comm.id }
 
 
 class TrackersView(LoginRequiredMixin, TemplateView):
