@@ -24,14 +24,26 @@ class TrackerSerializer(serializers.ModelSerializer):
 class ActivitySerializer(serializers.ModelSerializer):
 
     user = serializers.SerializerMethodField('get_user_data')
+    duration = serializers.SerializerMethodField('get_duration_string')
+    activity_date = serializers.SerializerMethodField('get_date_str')
+
+    def get_duration_string(self, activity):
+        secs = activity.moving_time % 60
+        mins = (activity.moving_time / 60) % 60
+        hours = activity.moving_time / 3600
+
+        return '{:02}:{:02}:{:02}'.format(int(hours), int(mins), secs)
 
     def get_user_data(self, activity):
         user_ser = SimpleUserSerializer(activity.user)
         return user_ser.data
 
+    def get_date_str(self, activity):
+        return activity.start_date.strftime('%a %b %d, %Y')
+
     class Meta:
         model = FitnessActivity
-        fields = ('user','source_id','source_name','activity_type','average_watts','distance','moving_time','score','created',)
+        fields = ('user','source_id','source_name','activity_type','average_watts','distance','moving_time', 'duration', 'score', 'activity_date',)
 
 class UserTrackerSerializer(serializers.ModelSerializer):
 

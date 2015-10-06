@@ -25,7 +25,7 @@
         <ul class="navigation">
           {% if request.user.is_authenticated %}
           <li class="logo { firstof request.home %}">
-            <a href="{ url 'ui:feed' %}">Home</a>
+            <a href="{% url 'ui:feed' %}">Home</a>
           </li>
           <li class="feed active">
             <a href="{ url webui:main_employee %}">Activity</a>

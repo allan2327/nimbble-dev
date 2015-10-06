@@ -1,13 +1,13 @@
 from django.test import TestCase
 from nimbble.models import Community, FitnessActivity
 from users.models import User
+from django.utils import timezone
 # Create your tests here.
 
 class TestCommunityACtivityRelationship(TestCase):
 
 
     def test_relationships(self):
-        import pdb; pdb.set_trace()
         commA = Community.objects.create(name='samsung')
         commB = Community.objects.create(name='frutti')
 
@@ -36,7 +36,16 @@ class TestCommunityACtivityRelationship(TestCase):
             self.add_activity(user, i)
 
     def add_activity(self, user, source_id):
-        return FitnessActivity.objects.create(user=user, source_id=source_id, source_name='s1', activity_type='a1', distance=1, moving_time=1, average_watts=12.4, score=10)
+        return FitnessActivity.objects.create(
+            user=user,
+            source_id=source_id,
+            start_date=timezone.now(),
+            source_name='s1',
+            activity_type='a1',
+            distance=1,
+            moving_time=1,
+            average_watts=12.4,
+            score=10)
 
 
 

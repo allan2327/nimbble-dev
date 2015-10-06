@@ -1,7 +1,8 @@
 from django.test import TestCase
-from nimbble.models import FitnessTracker, FitnessTrackerAccount, FitnessTrackerToken
+from nimbble.models import FitnessTracker, FitnessTrackerAccount, FitnessTrackerToken, FitnessActivity
 from users.models import User
-from nimbble.serializers import UserTrackerSerializer
+from django.utils import timezone
+from nimbble.serializers import UserTrackerSerializer, ActivitySerializer
 # Create your tests here.
 
 
@@ -36,6 +37,39 @@ class UserTrackerSerializerTest(TestCase):
 
         self.assertFalse(active)
 
+class ActivitySerializerTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='test1')
+        self.activity = FitnessActivity()
+        self.serializer = ActivitySerializer(self.activity)
+
+
+    def test_meta_has_correct_model(self):
+        self.assertTrue(self.serializer.Meta.model is FitnessActivity)
+
+
+    def test_meta_includes_correct_fields(self):
+        expected = ('user','source_id','source_name','activity_type','average_watts','distance','moving_time', 'duration', 'score', 'activity_date',)
+        fields = self.serializer.Meta.fields
+        self.assertTrue(fields == expected)
+
+
+    def test_get_duration_string(self):
+        self.activity.moving_time = 4521 # moving time in seconds
+
+        result = self.serializer.get_duration_string(self.activity)
+        expected = '{:02}:{:02}:{:02}'.format(1, 15, 21)
+
+        self.assertEquals(result, expected)
+
+
+    def test_get_date_str_correct_format(self):
+        self.activity.start_date = timezone.now()
+
+        result = self.serializer.get_date_str(self.activity)
+        expected = self.activity.start_date.strftime('%a %b %d, %Y')
+
+        self.assertEquals(result, expected)
 
 
 class SimpleTrackerFlowTest(TestCase):

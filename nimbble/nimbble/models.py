@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from datetime import datetime
 
 # Create your models here.
 
@@ -65,6 +66,7 @@ class FitnessActivity(models.Model):
     distance = models.DecimalField(max_digits=7, decimal_places=2)
     moving_time = models.IntegerField()
     score = models.IntegerField(blank=False, default=0)
+    start_date = models.DateTimeField(blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

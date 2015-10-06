@@ -21,11 +21,13 @@ class QuadraticPointCalculator(object):
 
 
 class StravaActivityConverter(object):
+    METER_TO_MILE = 0.000621371
 
     def __init__(self, calculator):
         self.calculator = calculator
 
     def create_activity(self, user, strava_act):
+        distance = strava_act.distance.num * self.METER_TO_MILE
         new_activity, created = FitnessActivity.objects.get_or_create(
             user = user,
             source_name = 'strava',
@@ -33,8 +35,9 @@ class StravaActivityConverter(object):
             defaults={
                 'activity_type': strava_act.type,
                 'average_watts': strava_act.average_watts if strava_act.average_watts else 5,
-                'distance': strava_act.distance.num,
-                'moving_time': strava_act.moving_time.total_seconds()
+                'distance': round(distance, 2),
+                'moving_time': strava_act.moving_time.total_seconds(),
+                'start_date': strava_act.start_date
             },
         )
 
@@ -77,5 +80,5 @@ def update_user_picture(sender, nimbble_token, **kwargs):
 
 @receiver(strava_activated)
 def update_user_activities_picture(sender, nimbble_token, **kwargs):
-    after = datetime.now() - timedelta(days=30)
+    after = datetime.now() - timedelta(days=60)
     StravaDataGatherer().sync(user=nimbble_token.user, token=nimbble_token.token, after=after)
