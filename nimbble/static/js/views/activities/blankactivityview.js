@@ -2,19 +2,16 @@ define([
   'jquery',
   'handlebars',
   'backbone',
-  'text!/static/frontend/fe_activity.html'
+  'text!/static/frontend/fe_empty_activity.html'
 ], function($, Handlebars, Backbone, activityTemplate){
     var ActivityView = Backbone.View.extend({
 
-        tagName: 'li',
         template: Handlebars.compile(activityTemplate),
 
         render: function() {
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template());
             return this;
         },
-
     });
-    // Returning instantiated views can be quite useful for having "state"
     return ActivityView;
 });

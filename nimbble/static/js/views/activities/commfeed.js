@@ -5,27 +5,34 @@ define([
   // Pull in the Collection module from above
   'collections/activities',
   'views/activities/activityview',
-], function($, _, Backbone, ActivityCollection, ActivityView){
+  'views/activities/blankactivityview',
+], function($, _, Backbone, ActivityCollection, ActivityView, BlankActivityView){
     var CommunityFeedView = Backbone.View.extend({
         el: $("#feed-container"),
         initialize: function(){
-            var parentId = this.$el.data('parent-id');
+            var source = this.$el.data('source'),
+                parentId = this.$el.data('source-id');
+
             this.collection = new ActivityCollection();
-            this.collection.url = '/api/v0/community/'+parentId+'/activities/';
+            this.collection.url = '/api/v0/'+source+'/'+parentId+'/activities/';
 
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.listenTo(this.collection, 'all', this.render);
 
-            this.$empty = $('#empty', this.el);
+            this.$loading = $('#loading', this.el);
             this.$feedList = $('.feed', this.el);
 
             this.collection.fetch();
         },
 
         render: function(){
-            if(this.collection.length){
-                this.$empty.hide();
+            this.$loading.hide();
+            if(!this.collection.length){
+                var blankView = new BlankActivityView({model: {}});
+                this.$feedList.html(blankView.render().el);
+            }else{
+                $('#empty', this.el).remove();
             }
         },
 

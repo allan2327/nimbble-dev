@@ -1,12 +1,19 @@
+from django.core.urlresolvers import reverse
 from rest_framework import serializers
 from rest_framework.fields import empty
 from nimbble.models import Community, FitnessTracker, FitnessActivity, FitnessTrackerToken
 from users.models import User
 
 class SimpleUserSerializer(serializers.ModelSerializer):
+
+    link = serializers.SerializerMethodField('get_user_link')
+
+    def get_user_link(self, user):
+        return reverse('ui:athlete', args=(user.id,))
+
     class Meta:
         model = User
-        fields = ('id', 'picture_url', 'points', 'username', 'first_name')
+        fields = ('id', 'picture_url', 'points', 'username', 'first_name', 'link')
 
 
 class CommunitySerializer(serializers.ModelSerializer):

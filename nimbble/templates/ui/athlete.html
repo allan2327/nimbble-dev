@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+    <script type="text/javascript" data-main="/static/js/main" src="/static/js/libs/require.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card profile margin-top">
+        <img class="profile-image circle medium" src="{{ user.picture_url }}">
+        <div class="cover">
+          <img src="http://placeimg.com/1000/1000/nature"/>
+        </div>
+        <ul class="list">
+          <li class="call-out">
+            <h1>
+            {{ user.first_name }} {{ user.last_name }}
+            <small class="block">
+                <em>Can't stop won't stop</em>
+            </small>
+            </h1>
+          </li>
+          <li>
+            <h3>About me</h3>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi venenatis, augue a aliquet sodales, lorem sem egestas neque, in sodales purus justo ut nisi. Phasellus nec varius sem. Curabitur ac sem libero. Donec sed justo feugiat, hendrerit nisi sed, commodo eros.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div id="feed-container" class="card margin-top" data-source="user" data-source-id="{{ user.id }}">
+        <ul class="feed md-action-space-right">
+        </ul>
+      </div>
+    </div>
+    <div class="js-stats-container col-md-7" data-type="user" data-group="{{ nimbbleId }}" data-load="demo">
+      <div class="row js-stats"></div>
+      <div class="card margin-top js-sim-container">
+        <div class="js-chart-container padding"></div>
+        <div class="js-weekly-indicator call-out-top"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

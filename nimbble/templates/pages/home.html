@@ -15,11 +15,11 @@
     {% include 'messages.html' %}
     <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
-            <div id="feed-container" class="card margin-top" data-parent-id="{{ parent_id }}">
+            <div id="feed-container" class="card margin-top" data-source="community" data-source-id="{{ parent_id }}">
                 <ul class="feed action-space-right">
-                    <li id="empty" class="empty-set">
+                    <li id="loading" class="empty-set">
                       <img class="profile-image small" src="/static/images/snail.png"></img>
-                      <p><strong>Oops!</strong> No activity found.</p>
+                      <p><strong>Loading!! </strong> Retrieving recent activities.</p>
                     </li>
                 </ul>
             </div>

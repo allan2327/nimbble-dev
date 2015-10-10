@@ -14,7 +14,6 @@ class QuadraticPointCalculator(object):
     }
 
     def update_score(self, activity):
-        type = activity.activity_type
         scale = self.COEFFICIENT.get(activity.activity_type.lower(), 0.01)
         score = math.sqrt(float(scale) * float(activity.average_watts))
         activity.score = score
@@ -46,6 +45,7 @@ class StravaActivityConverter(object):
 
         default_comm = user.communities.get(is_default=True)
         CommunityActivityLink.objects.create(community=default_comm, activity=new_activity)
+
 
 class StravaDataGatherer(object):
 
@@ -79,6 +79,6 @@ def update_user_picture(sender, nimbble_token, **kwargs):
 
 
 @receiver(strava_activated)
-def update_user_activities_picture(sender, nimbble_token, **kwargs):
+def update_user_activities(sender, nimbble_token, **kwargs):
     after = datetime.now() - timedelta(days=60)
     StravaDataGatherer().sync(user=nimbble_token.user, token=nimbble_token.token, after=after)

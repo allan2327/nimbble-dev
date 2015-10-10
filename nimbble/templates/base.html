@@ -27,13 +27,13 @@
           <li class="logo { firstof request.home %}">
             <a href="{% url 'ui:feed' %}">Home</a>
           </li>
-          <li class="feed active">
-            <a href="{ url webui:main_employee %}">Activity</a>
+          <li class="feed {{ feed_view }}">
+            <a href="{% url 'ui:feed' %}">Activity</a>
           </li>
           <li Class="stats { firstof request.stats %}">
             <a href="{ url webui:stats %}">Stats</a>
           </li>
-          <li class="trackers { firstof request.trackers %}">
+          <li class="trackers {{ tracker_view }}">
             <a href="{% url 'ui:trackers' %}">Trackers</a>
           </li>
           <li class="">
@@ -61,13 +61,5 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
-    {% block templates %}
-        {% filter addslashes %}
-        <div id="templates">
-        {% include 'ui/fe_activity.html' %}
-        </div>
-        {% endfilter %}
-    {% endblock %}
   </body>
 </html>
