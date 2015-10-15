@@ -17,10 +17,7 @@
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div id="feed-container" class="card margin-top" data-source="community" data-source-id="{{ parent_id }}">
                 <ul class="feed action-space-right">
-                    <li id="loading" class="empty-set">
-                      <img class="profile-image small" src="/static/images/snail.png"></img>
-                      <p><strong>Loading!! </strong> Retrieving recent activities.</p>
-                    </li>
+                    {% include 'ui/loading_row.html' %}
                 </ul>
             </div>
         </div>

@@ -13,12 +13,13 @@ from nimbble.utils import get_current_community
 from users.models import User
 
 class FeedView(LoginRequiredMixin, TemplateView):
+    loading_message = 'Retrieving recent activities.'
     template_name = 'pages/home.html'
 
     def get_context_data(self, **kwargs):
         comm = get_current_community(self.request)
 
-        return { 'feed_view': 'active', 'parent_id': comm.id }
+        return { 'feed_view': 'active', 'parent_id': comm.id, 'loading_message': self.loading_message }
 
 
 class AthleteView(LoginRequiredMixin, TemplateView):
@@ -31,13 +32,14 @@ class AthleteView(LoginRequiredMixin, TemplateView):
 
 
 class TrackersView(LoginRequiredMixin, TemplateView):
+    loading_message = 'Retrieving your fitness trackers.'
     template_name = 'ui/trackers.html'
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         trackers = FitnessTracker.objects.all()
         serializer = UserTrackerSerializer(trackers, many=True, user=user)
-        return { 'tracker_view': 'active', 'trackers': serializer.data }
+        return { 'tracker_view': 'active', 'trackers': serializer.data, 'loading_message': self.loading_message }
 
 
 class SignInRedirect(RedirectView):

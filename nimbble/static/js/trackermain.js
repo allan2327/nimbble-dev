@@ -8,6 +8,6 @@ require.config({
   }
 });
 
-require(['views/activities/commfeed'], function (CommunityFeedView) {
-	var feedView = new CommunityFeedView();
+require(['views/trackers/trackerlistview'], function (TrackersView) {
+	var feedView = new TrackersView();
 });

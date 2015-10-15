@@ -19,7 +19,7 @@ class CommunityActivityFeedList(generics.ListAPIView):
 
     def get_queryset(self):
         communityId = self.kwargs.get('pk')
-        return FitnessActivity.objects.filter(community_link__community=communityId)
+        return FitnessActivity.objects.filter(community_link__community=communityId).order_by('-start_date')
 
 
 class UserActivityFeedList(generics.ListAPIView):
@@ -27,7 +27,7 @@ class UserActivityFeedList(generics.ListAPIView):
 
     def get_queryset(self):
         userId = self.kwargs.get('pk')
-        return FitnessActivity.objects.filter(user=userId)
+        return FitnessActivity.objects.filter(user=userId).order_by('-start_date')
 
 
 class TrackerList(generics.ListCreateAPIView):

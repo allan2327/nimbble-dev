@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+    <script type="text/javascript" data-main="/static/js/trackermain" src="/static/js/libs/require.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <header class="header">
   <h1>
@@ -12,10 +16,8 @@
     <div class="row">
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card margin-top">
-                <ul class="feed action-space-right">
-                    {% for tracker in trackers %}
-                        {% include "ui/tracker_row.html" %}
-                    {% endfor %}
+                <ul id="feed-container" class="feed action-space-right">
+                    {% include 'ui/loading_row.html' %}
                 </ul>
             </div>
         </div>

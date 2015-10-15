@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^user/(?P<pk>[0-9]+)/activities/$', views.UserActivityFeedList.as_view()),
     url(r'^trackers/$', views.TrackerList.as_view()),
     url(r'^tracker/(?P<pk>[0-9]+)/$', views.TrackerDetail.as_view()),
-    url(r'^usertrackers/$', views.UserTrackerList.as_view()),
+    url(r'^user/trackers/$', views.UserTrackerList.as_view()),
 
     url(r'', include('nimbble.fitnessaccount.strava.urls')),
     url(r'', include('nimbble.fitnessaccount.fitbit.urls')),
