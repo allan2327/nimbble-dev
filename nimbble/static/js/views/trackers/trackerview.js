@@ -13,7 +13,12 @@ define([
         },
 
         deactivateTracker: function(e){
-            alert('deactivate me');
+            $.post('/api/v0/tracker/deactivate/', { tracker_id: 321 })
+                .done(function(d){
+                })
+                .error(function(d){
+                });
+
         },
 
         render: function() {

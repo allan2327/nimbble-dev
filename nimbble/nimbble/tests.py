@@ -96,8 +96,56 @@ class SimpleTrackerFlowTest(TestCase):
 
 
 
+from nimbble.views import DeactivateTrackerDetail
 
 
+class RequestMock(object):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+class DeactivateTrackerTest(TestCase):
+
+    def setUp(self):
+        user = User.objects.create(username='testuser1')
+        tracker = FitnessTracker.objects.create(name='sv', icon_url='i.png', tracker_link='sv.com')
+        self.token = FitnessTrackerToken.objects.create(user=user, tracker=tracker, token='pqe23k4ok')
+        self.view = DeactivateTrackerDetail()
+
+    def test_deactivate_with_valid_id_deletes_tracker_token(self):
+        simplePostRequest = RequestMock(user= self.token.user, POST = { 'token_id': str(self.token.id) })
+
+        self.view.post(simplePostRequest)
+
+        tokens = FitnessTrackerToken.objects.all()
+        self.assertEquals(0, len(tokens))
+
+    def test_deactivate_with_valid_id_returns_success_message(self):
+        simplePostRequest = RequestMock(user= self.token.user, POST = { 'token_id': str(self.token.id) })
+
+        result = self.view.post(simplePostRequest)
+
+        message = 'You have successfully deactivated {}.'.format(self.token.tracker.name)
+
+        self.assertTrue(result.data['success'])
+        self.assertEqual(result.data['message'], message)
+
+    def test_deactivate_a_tracker_multiple_times_creates_error_message(self):
+        simplePostRequest = RequestMock(user= self.token.user, POST = { 'token_id': str(self.token.id) })
+
+        result = self.view.post(simplePostRequest)
+        self.assertTrue(result.data['success'])
+
+        result = self.view.post(simplePostRequest)
+        self.assertFalse(result.data['success'])
+        self.assertEqual(result.data['message'], 'Invalid tracker id.')
+
+    def test_deactivate_without_tracker_id_creates_error_message(self):
+        simplePostRequest = RequestMock(user= self.token.user, POST = { 'token_id': '' })
+
+        result = self.view.post(simplePostRequest)
+
+        self.assertFalse(result.data['success'])
+        self.assertEqual(result.data['message'], 'Invalid tracker id.')
 
 
 

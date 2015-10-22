@@ -3,7 +3,7 @@
 <h4 class="name"><a href="{{ tracker_link }}" target="_blank">{{ name }}</a></h4>
 <span class="description">{{ description }}</span>
 {{#if active }}
-  <a class="btn action btn-sm btn-primary btn-ghost js-deactivate" href="#">DEACTIVATE</a>
-{{ else }}
   <a class="btn action btn-sm btn-primary btn-ghost" href="{{ auth_url }}">ACTIVATE</a>
+{{ else }}
+  <a class="btn action btn-sm btn-primary btn-ghost js-deactivate" href="#">DEACTIVATE</a>
 {{/if}}
