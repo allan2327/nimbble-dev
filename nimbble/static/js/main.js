@@ -8,21 +8,6 @@ require.config({
   }
 });
 
-require(['jquery', 'views/activities/commfeed'], function ($, CommunityFeedView) {
-
-    var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-
+require(['utils/setcsrftoken', 'views/activities/commfeed'], function (t, CommunityFeedView) {
 	var feedView = new CommunityFeedView();
 });

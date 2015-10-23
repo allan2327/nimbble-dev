@@ -59,10 +59,15 @@ class UserTrackerSerializer(serializers.ModelSerializer):
         self.user = user
 
     active = serializers.SerializerMethodField('get_active_status')
+    token_id = serializers.SerializerMethodField('get_tracker_token')
 
     def get_active_status(self, tracker):
         return FitnessTrackerToken.objects.filter(user=self.user, tracker=tracker).exists()
 
+    def get_tracker_token(self, tracker):
+        tokens = FitnessTrackerToken.objects.filter(user=self.user, tracker=tracker)
+        return tokens.get().id if len(tokens) else 0
+
     class Meta:
         model = FitnessTracker
-        fields = ('id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link', 'active')
+        fields = ('id', 'token_id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link', 'active')

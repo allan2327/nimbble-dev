@@ -1,7 +1,5 @@
-{% if messages %}
-<div class="message-container margin-top">
+<div class="js-msg-container message-container margin-top">
     {% for message in messages %}
         <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
 </div>
-{% endif %}

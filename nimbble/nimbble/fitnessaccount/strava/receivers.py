@@ -44,7 +44,7 @@ class StravaActivityConverter(object):
         new_activity.save()
 
         default_comm = user.communities.get(is_default=True)
-        CommunityActivityLink.objects.create(community=default_comm, activity=new_activity)
+        CommunityActivityLink.objects.get_or_create(community=default_comm, activity=new_activity)
 
 
 class StravaDataGatherer(object):
