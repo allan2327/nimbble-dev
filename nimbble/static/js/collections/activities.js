@@ -1,18 +1,44 @@
 define(['underscore','backbone','models/activity'], function(_, Backbone, ActivityModel){
-    var ActivityCollection = Backbone.Collection.extend({
-        model: ActivityModel,
 
-        hasNextPage: function(){ return !!this.nextUrl; },
-        hasPrevPage: function(){ return !!this.prevUrl; },
+    var UrlParser = {
+        getSearchParam: function(url){
+            if(!url) return null;
 
-        parse: function(request){
-            this.nextUrl = request.next;
-            this.prevUrl = request.previous;
-
-            this.trigger('preParse')
-            return request.results;
+            var parser = document.createElement('a');
+            parser.href = url;
+            return parser.search;
         },
-    });
+    };
+
+    var ActivityCollection = Backbone.Collection.extend((function(){
+
+        var _origUrl = '',
+            _nextParam = null,
+            _prevParam = null;
+
+        return {
+            model: ActivityModel,
+
+            hasNextPage: function(){ return !!_nextParam; },
+            hasPrevPage: function(){ return !!_prevParam; },
+            setUrl: function(data){
+                _origUrl = this.url = '/api/v0/'+data.source+'/'+data.parentId+'/activities/';
+            },
+
+            requestNextPage: function(){
+                this.url = _origUrl + _nextParam;
+                this.fetch();
+            },
+
+            parse: function(request){
+                _nextParam = UrlParser.getSearchParam(request.next);
+                _prevParam = UrlParser.getSearchParam(request.previous);
+
+                this.trigger('preParse')
+                return request.results;
+            },
+        };
+    })());
 
     return ActivityCollection;
 });

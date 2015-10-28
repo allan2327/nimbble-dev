@@ -9,12 +9,17 @@ define([
 ], function($, _, Backbone, ActivityCollection, ActivityView, BlankActivityView){
     var CommunityFeedView = Backbone.View.extend({
         el: $("#feed-container"),
+
+        events: {
+            'click a.loadmore': 'nextResultPage',
+        },
+
         initialize: function(){
             var source = this.$el.data('source'),
                 parentId = this.$el.data('source-id');
 
             this.collection = new ActivityCollection();
-            this.collection.url = '/api/v0/'+source+'/'+parentId+'/activities/';
+            this.collection.setUrl({ source: source, parentId: parentId });
 
             this.listenTo(this.collection, 'add', this.addOne);
             this.listenTo(this.collection, 'all', this.render);
@@ -25,6 +30,11 @@ define([
             this.$loadMore = $('#loadMore', this.el);
 
             this.collection.fetch();
+        },
+
+        nextResultPage: function(e){
+            e.preventDefault(); e.stopPropagation();
+            this.collection.requestNextPage();
         },
 
         render: function(){
