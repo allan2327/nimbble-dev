@@ -17,34 +17,32 @@ define([
             this.collection.url = '/api/v0/'+source+'/'+parentId+'/activities/';
 
             this.listenTo(this.collection, 'add', this.addOne);
-            this.listenTo(this.collection, 'reset', this.addAll);
             this.listenTo(this.collection, 'all', this.render);
+            this.listenTo(this.collection, 'preParse', this.enableLoadMore);
 
             this.$loading = $('#loading', this.el);
             this.$feedList = $('.feed', this.el);
+            this.$loadMore = $('#loadMore', this.el);
 
             this.collection.fetch();
         },
 
         render: function(){
             this.$loading.hide();
-            if(!this.collection.length){
-                var blankView = new BlankActivityView({model: {}});
-                this.$feedList.html(blankView.render().el);
-            }else{
-                $('#empty', this.el).remove();
-            }
+        },
+
+        enableLoadMore: function(){
+            if(this.collection.hasNextPage())
+                this.$loadMore.removeClass('hidden');
+            else
+                this.$loadMore.addClass('hidden');
         },
 
         addOne: function(activity){
             var view = new ActivityView({model: activity});
             this.$feedList.append(view.render().el);
         },
-
-        addAll: function(){
-            this.collection.each(this.addOne, this);
-        },
     });
-    // Returning instantiated views can be quite useful for having "state"
+
     return CommunityFeedView;
 });

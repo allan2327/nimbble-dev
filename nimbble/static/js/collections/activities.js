@@ -2,10 +2,17 @@ define(['underscore','backbone','models/activity'], function(_, Backbone, Activi
     var ActivityCollection = Backbone.Collection.extend({
         model: ActivityModel,
 
+        hasNextPage: function(){ return !!this.nextUrl; },
+        hasPrevPage: function(){ return !!this.prevUrl; },
+
         parse: function(request){
+            this.nextUrl = request.next;
+            this.prevUrl = request.previous;
+
+            this.trigger('preParse')
             return request.results;
         },
     });
-    // You don't usually return a collection instantiated
+
     return ActivityCollection;
 });

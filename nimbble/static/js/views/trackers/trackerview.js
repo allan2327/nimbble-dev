@@ -20,8 +20,8 @@ define([
                 view: this,
             };
 
-            Dispatcher.post(msg)
-                .success(this.resetActionStatus);
+            var reset = this.resetActionStatus.bind(this);
+            Dispatcher.post(msg).success(reset);
         },
 
         resetActionStatus: function(d){

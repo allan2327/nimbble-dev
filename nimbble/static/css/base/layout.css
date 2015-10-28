@@ -30,15 +30,15 @@ aside.sidebar ul {
   height: 100%;
 }
 
-aside.sidebar ul li { 
-  display: block; 
+aside.sidebar ul li {
+  display: block;
   border-top: 1px solid #3c475c;
   border-bottom: 1px solid #2e3748;
 }
 
-aside.sidebar ul li:last-child { border-bottom: 0; } 
+aside.sidebar ul li:last-child { border-bottom: 0; }
 
-aside.sidebar ul li a { 
+aside.sidebar ul li a {
   color: #a0aabe;
   text-decoration: none;
   text-transform: uppercase;
@@ -47,7 +47,7 @@ aside.sidebar ul li a {
   padding: 14px 20px 14px 50px;
   width: 100%;
   display: inline-block;
-  border-left: 4px solid transparent; 
+  border-left: 4px solid transparent;
   transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   -ms-transition: all 0.25s ease-in-out;
@@ -56,37 +56,37 @@ aside.sidebar ul li a {
 }
 
 aside.sidebar ul li.active a,
-aside.sidebar ul li a:hover { 
+aside.sidebar ul li a:hover {
   color: #fff;
-  border-left: 4px solid #e74c3c; 
+  border-left: 4px solid #e74c3c;
 }
 
-aside.sidebar ul li.feed a { background: transparent url('../images/feed-inactive.png') no-repeat 20px center; }
+aside.sidebar ul li.feed a { background: transparent url('../../images/feed-inactive.png') no-repeat 20px center; }
 
 aside.sidebar ul li.feed a:hover,
-aside.sidebar ul li.feed.active a { 
-  background: transparent url('../images/feed-active.png') no-repeat 20px center; 
+aside.sidebar ul li.feed.active a {
+  background: transparent url('../../images/feed-active.png') no-repeat 20px center;
 }
 
-aside.sidebar ul li.stats a { background: transparent url('../images/stats-inactive.png') no-repeat 20px center; }
+aside.sidebar ul li.stats a { background: transparent url('../../images/stats-inactive.png') no-repeat 20px center; }
 
-aside.sidebar ul li.stats a:hover, 
-aside.sidebar ul li.stats.active a { 
-  background: transparent url('../images/stats-active.png') no-repeat 20px center; 
+aside.sidebar ul li.stats a:hover,
+aside.sidebar ul li.stats.active a {
+  background: transparent url('../../images/stats-active.png') no-repeat 20px center;
 }
 
-aside.sidebar ul li.signup a { background: transparent url('../images/check-inactive.png') no-repeat 20px center; }
+aside.sidebar ul li.signup a { background: transparent url('../../images/check-inactive.png') no-repeat 20px center; }
 
-aside.sidebar ul li.signup a:hover, 
-aside.sidebar ul li.signup.active a { 
-  background: transparent url('../images/check-active.png') no-repeat 20px center; 
+aside.sidebar ul li.signup a:hover,
+aside.sidebar ul li.signup.active a {
+  background: transparent url('../../images/check-active.png') no-repeat 20px center;
 }
 
-aside.sidebar ul li.trackers a { background: transparent url('../images/phone-inactive.png') no-repeat 20px center; }
+aside.sidebar ul li.trackers a { background: transparent url('../../images/phone-inactive.png') no-repeat 20px center; }
 
-aside.sidebar ul li.trackers a:hover, 
-aside.sidebar ul li.trackers.active a { 
-  background: transparent url('../images/phone-active.png') no-repeat 20px center; 
+aside.sidebar ul li.trackers a:hover,
+aside.sidebar ul li.trackers.active a {
+  background: transparent url('../../images/phone-active.png') no-repeat 20px center;
 }
 
 aside.sidebar ul li.logo { max-height: 100px; }
@@ -100,10 +100,10 @@ aside.sidebar ul li.logo a:hover  {
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
-  background: transparent url('../images/logo-white.png') no-repeat center center;
+  background: transparent url('../../images/logo-white.png') no-repeat center center;
 }
 
-aside.sidebar ul li.user { 
+aside.sidebar ul li.user {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -122,7 +122,7 @@ aside.sidebar ul li.user:before {
   width: 100%;
   height: 1px;
   background: #2e3748;
-} 
+}
 
 aside.sidebar ul li.user .img-wrapper {
   margin: 0 auto;
@@ -146,7 +146,7 @@ aside.sidebar ul li.user a {
   border: 0;
   display: block;
   text-transform: none;
-} 
+}
 
 aside.sidebar ul li.user a.employee { color: #4495d1; }
 
@@ -187,7 +187,7 @@ header.header h1 small {
 
   #content { margin-left: 50px; }
   aside.sidebar { width: 50px; }
-  
+
   aside.sidebar ul li {
     width: 50px;
     height: 50px;
@@ -204,10 +204,10 @@ header.header h1 small {
   }
 
   aside.sidebar ul li.logo a,
-  aside.sidebar ul li.logo a:hover  { 
+  aside.sidebar ul li.logo a:hover  {
     height: 50px;
     width: 50px;
-    background: transparent url('../images/logo-small.png') no-repeat center center; 
+    background: transparent url('../../images/logo-small.png') no-repeat center center;
   }
 
   aside.sidebar ul li.user { padding: 10px 0 10px 0; }
@@ -219,15 +219,15 @@ header.header h1 small {
     height: 50px;
   }
 
-  aside.sidebar ul li.user .img-wrapper img { 
+  aside.sidebar ul li.user .img-wrapper img {
     width: 35px;
     height: 35px;
   }
 
   aside.sidebar ul li.user .img-wrapper a.employee,
   aside.sidebar ul li.user .img-wrapper a.dept,
-  aside.sidebar ul li.user .img-wrapper .hex-badge { 
-    display: none; 
+  aside.sidebar ul li.user .img-wrapper .hex-badge {
+    display: none;
   }
 
 }

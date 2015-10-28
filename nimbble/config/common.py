@@ -285,13 +285,18 @@ class Common(Configuration):
     PIPELINE_CSS = {
         'application': {
             'source_filenames': (
-              'css/*.css',
+              'css/base/*.css',
             ),
             'output_filename': 'css/application.css',
-            'extra_context': {
-                'media': 'screen,projection',
-            },
+            'extra_context': { 'media': 'screen,projection', },
         },
+        'trackers': {
+            'source_filenames': (
+              'css/tracker.css',
+            ),
+            'output_filename': 'css/trackers.css',
+            'extra_context': { 'media': 'screen,projection', },
+        }
     }
 
     PIPELINE_JS = {
