@@ -12,22 +12,18 @@ class UserTrackerSerializerTest(TestCase):
         self.tracker = FitnessTracker.objects.create(name='strava')
         self.serializer = UserTrackerSerializer(self.tracker, user=self.user)
 
-
     def test_meta_has_correct_model(self):
         self.assertTrue(self.serializer.Meta.model is FitnessTracker)
 
-
     def test_meta_includes_correct_fields(self):
-        expected = ('id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link', 'active')
+        expected = ('id', 'token_id', 'name', 'description', 'icon_url', 'auth_url', 'tracker_link', 'active')
         fields = self.serializer.Meta.fields
         self.assertTrue(fields == expected)
-
 
     def test_get_active_status_user_has_auth_tracker(self):
         FitnessTrackerToken.objects.create(user=self.user, tracker=self.tracker)
         active = self.serializer.get_active_status(self.tracker)
         self.assertTrue(active)
-
 
     def test_get_active_status_user_does_not_have_auth_tracker(self):
         tracker2 = FitnessTracker.objects.create(name='other-tracker')
@@ -36,6 +32,16 @@ class UserTrackerSerializerTest(TestCase):
         active = self.serializer.get_active_status(self.tracker)
 
         self.assertFalse(active)
+
+    def test_get_tracker_token_user_with_token(self):
+        token = FitnessTrackerToken.objects.create(user=self.user, tracker=self.tracker)
+        token_id = self.serializer.get_tracker_token(self.tracker)
+        self.assertEquals(token_id, token.id)
+
+    def test_get_tracker_token_user_without_token(self):
+        token_id = self.serializer.get_tracker_token(self.tracker)
+        self.assertEquals(token_id, 0)
+
 
 class ActivitySerializerTest(TestCase):
     def setUp(self):

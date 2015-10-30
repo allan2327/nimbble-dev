@@ -1,5 +1,9 @@
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
+from nimbble.fitnessaccount.signals import activities_loaded
+from nimbble.models import FitnessActivity
+from django.db.models import Sum
+
 
 @receiver(user_signed_up)
 def set_additional_values(sender, **kwargs):
@@ -7,6 +11,14 @@ def set_additional_values(sender, **kwargs):
 
     FbSignalReceiver().new_user(user)
     DefaultCommunityReceiver().set_default(user)
+
+
+@receiver(activities_loaded)
+def update_user_score(sender, **kwargs):
+    user = kwargs.pop('user')
+    pointObj = FitnessActivity.objects.aggregate(Sum('score'))
+    user.points = pointObj.get('score__sum')
+    user.save()
 
 
 class FbSignalReceiver(object):

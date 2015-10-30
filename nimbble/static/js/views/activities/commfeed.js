@@ -2,7 +2,6 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  // Pull in the Collection module from above
   'collections/activities',
   'views/activities/activityview',
   'views/activities/blankactivityview',
@@ -22,10 +21,9 @@ define([
             this.collection.setUrl({ source: source, parentId: parentId });
 
             this.listenTo(this.collection, 'add', this.addOne);
-            this.listenTo(this.collection, 'all', this.render);
+            this.listenToOnce(this.collection, 'preParse', this.hideLoading);
             this.listenTo(this.collection, 'preParse', this.enableLoadMore);
 
-            this.$loading = $('#loading', this.el);
             this.$feedList = $('.feed', this.el);
             this.$loadMore = $('#loadMore', this.el);
 
@@ -37,8 +35,8 @@ define([
             this.collection.requestNextPage();
         },
 
-        render: function(){
-            this.$loading.hide();
+        hideLoading: function(){
+            $('#loading', this.el).hide();
         },
 
         enableLoadMore: function(){

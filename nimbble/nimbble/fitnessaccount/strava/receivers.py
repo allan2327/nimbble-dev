@@ -3,6 +3,7 @@ from .signals import strava_activated
 from stravalib.client import Client
 from datetime import datetime, timedelta
 from nimbble.models import FitnessActivity, CommunityActivityLink
+from nimbble.fitnessaccount.signals import activities_loaded
 import math
 
 class QuadraticPointCalculator(object):
@@ -15,7 +16,7 @@ class QuadraticPointCalculator(object):
 
     def update_score(self, activity):
         scale = self.COEFFICIENT.get(activity.activity_type.lower(), 0.01)
-        score = math.sqrt(float(scale) * float(activity.average_watts))
+        score = math.sqrt(float(scale) * float(activity.average_watts + activity.distance))
         activity.score = score
 
 
@@ -82,3 +83,4 @@ def update_user_picture(sender, nimbble_token, **kwargs):
 def update_user_activities(sender, nimbble_token, **kwargs):
     after = datetime.now() - timedelta(days=60)
     StravaDataGatherer().sync(user=nimbble_token.user, token=nimbble_token.token, after=after)
+    activities_loaded.send(sender=sender, user=nimbble_token.user)
