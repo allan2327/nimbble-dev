@@ -6,6 +6,7 @@ from nimbble.models import FitnessTracker, FitnessTrackerAccount, FitnessTracker
 from users.models import User
 
 from .views import TokenHandler, StravaTokenRedirectView
+from .receivers import sync_user_activities
 # Create your tests here.
 
 
@@ -73,6 +74,34 @@ class TestStravaTokenRedirectView(TestCase):
 
         StravaTokenRedirectView().get(self.request)
         mock_token_handler.assert_called_with(self.user, self.request.GET.get('code'))
+
+
+
+from datetime import datetime, timedelta
+class TestSyncUserActivitiesReceiver(TestCase):
+
+
+    def setUp(self):
+        self.user = User.objects.create(username='testuser')
+        self.tracker = FitnessTracker.objects.create(name='strava')
+
+
+    @patch('nimbble.fitnessaccount.strava.receivers.StravaDataGatherer.sync')
+    def test_receiver_calls_data_gatherer_with_token(self, mock_sync_handler):
+        token = FitnessTrackerToken.objects.create(user=self.user, tracker=self.tracker, token='sample token')
+        sync_user_activities(None, self.user)
+        mock_sync_handler.assert_called_with(user=self.user, token=token)
+
+
+    @patch('nimbble.fitnessaccount.strava.receivers.StravaDataGatherer.sync')
+    def test_receiver_calls_data_gatherer_without_token(self, mock_sync_handler):
+        sync_user_activities(None, self.user)
+        self.assertFalse(mock_sync_handler.called)
+
+
+
+
+
 
 
 

@@ -2,8 +2,9 @@ from django.dispatch import receiver
 from .signals import strava_activated
 from stravalib.client import Client
 from datetime import datetime, timedelta
-from nimbble.models import FitnessActivity, CommunityActivityLink
+from nimbble.models import FitnessActivity, CommunityActivityLink, FitnessTracker, FitnessTrackerToken
 from nimbble.fitnessaccount.signals import activities_loaded
+from nimbble.signals import sync_activities
 import math
 
 class QuadraticPointCalculator(object):
@@ -63,8 +64,9 @@ class StravaDataGatherer(object):
 
     def sync(self, user, token, **kwargs):
         client = Client(access_token=token)
+        days = kwargs['days'] if 'days' in kwargs else 10
+        after = datetime.today() - timedelta(days=days)
 
-        after = kwargs['after'] if 'after' in kwargs else datetime.now()
         activities = client.get_activities(after=after)
 
         converter = StravaActivityConverter(QuadraticPointCalculator())
@@ -81,6 +83,25 @@ def update_user_picture(sender, nimbble_token, **kwargs):
 
 @receiver(strava_activated)
 def update_user_activities(sender, nimbble_token, **kwargs):
-    after = datetime.now() - timedelta(days=60)
-    StravaDataGatherer().sync(user=nimbble_token.user, token=nimbble_token.token, after=after)
+    StravaDataGatherer().sync(user=nimbble_token.user, token=nimbble_token.token, days=60)
     activities_loaded.send(sender=sender, user=nimbble_token.user)
+
+
+from django.core.exceptions import ObjectDoesNotExist
+from requests.exceptions import HTTPError
+from django.contrib import messages
+
+@receiver(sync_activities)
+def sync_user_activities(sender, user, **kwargs):
+    tracker = FitnessTracker.objects.get(name='strava')
+
+    try:
+        token = FitnessTrackerToken.objects.get(user=user, tracker=tracker)
+        StravaDataGatherer().sync(user=user, token=token)
+    except ObjectDoesNotExist:
+        pass # If the token does not exists, the user does not have this tracker.
+
+    except HTTPError as e:
+        message = e.args[0]
+        auth = tracker.auth_url
+        messages.error(sender._request, 'Sorry!! We had issues authenticating your {0}.<a href="{1}">Please authenticate again.</a>'.format('Strava', auth))

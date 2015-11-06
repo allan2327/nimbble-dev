@@ -4,6 +4,8 @@ from rest_framework import generics
 from rest_framework.serializers import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class CommunityList(generics.ListCreateAPIView):
     queryset = Community.objects.all()
@@ -66,3 +68,39 @@ class UserTrackerList(APIView):
         trackers = FitnessTracker.objects.all()
         serializer = serializers.UserTrackerSerializer(trackers, many=True, user=user)
         return Response(serializer.data)
+
+
+from nimbble.signals import sync_activities
+from requests.exceptions import HTTPError
+from django.contrib.messages import get_messages
+
+class UserSync(APIView):
+    http_method_names = ['get']
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        user = request.user
+        try:
+            sync_activities.send(sender=request, user=user)
+        except:
+            return Response({ 'success': False, 'message': 'Un-expected error, please try later.' })
+
+        storage = get_messages(request)
+        messages = [{'tags': message.tags, 'message': message.message} for message in storage]
+
+        return Response({ 'success': True, 'messages': messages })
+
+
+
+
+
+
+
+
+
+
+
+
+def asdf():
+    pass

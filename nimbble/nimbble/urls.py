@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^community/(?P<pk>[0-9]+)/activities/$', views.CommunityActivityFeedList.as_view()),
     url(r'^user/(?P<pk>[0-9]+)/activities/$', views.UserActivityFeedList.as_view()),
     url(r'^user/trackers/$', views.UserTrackerList.as_view()),
+    url(r'^user/sync/$', views.UserSync.as_view(), name='user_sync'),
 
     url(r'^trackers/$', views.TrackerList.as_view()),
     url(r'^tracker/deactivate/$', views.DeactivateTrackerDetail.as_view()),

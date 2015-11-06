@@ -8,6 +8,6 @@ require.config({
   }
 });
 
-require(['utils/setcsrftoken', 'views/activities/commfeed'], function (t, CommunityFeedView) {
+require(['views/activities/commfeed', 'utils/setup'], function (CommunityFeedView) {
 	var feedView = new CommunityFeedView();
 });
