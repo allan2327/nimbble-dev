@@ -1,34 +1,14 @@
 {% extends "base.html" %}
 
 {% block scripts %}
-    <script type="text/javascript" data-main="/static/js/main" src="/static/js/libs/require.min.js"></script>
+    <script type="text/javascript" data-main="/static/js/usermain" src="/static/js/libs/require.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-5">
-      <div class="card profile margin-top">
-        <img class="profile-image circle medium" src="{{ user.picture_url }}">
-        <div class="cover">
-          <img src="http://placeimg.com/1000/1000/nature"/>
-        </div>
-        <ul class="list">
-          <li class="call-out">
-            <h1>
-            {{ user.first_name }} {{ user.last_name }}
-            <small class="block">
-                <em>Can't stop won't stop</em>
-            </small>
-            </h1>
-          </li>
-          <li>
-            <h3>About me</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi venenatis, augue a aliquet sodales, lorem sem egestas neque, in sodales purus justo ut nisi. Phasellus nec varius sem. Curabitur ac sem libero. Donec sed justo feugiat, hendrerit nisi sed, commodo eros.
-            </p>
-          </li>
-        </ul>
+      <div id="user-profile" class="card profile margin-top" data-user-id='{{ user.id }}'>
       </div>
       <div id="feed-container" class="card margin-top" data-source="user" data-source-id="{{ user.id }}">
         <ul class="feed md-action-space-right">

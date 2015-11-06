@@ -6,7 +6,10 @@ urlpatterns = [
     url(r'^communities/$', views.CommunityList.as_view()),
     url(r'^community/(?P<pk>[0-9]+)/$', views.CommunityDetail.as_view()),
     url(r'^community/(?P<pk>[0-9]+)/activities/$', views.CommunityActivityFeedList.as_view()),
+
     url(r'^user/(?P<pk>[0-9]+)/activities/$', views.UserActivityFeedList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)$', views.UserTemp.as_view()),
+
     url(r'^user/trackers/$', views.UserTrackerList.as_view()),
     url(r'^user/sync/$', views.UserSync.as_view(), name='user_sync'),
 

@@ -33,6 +33,14 @@ class UserActivityFeedList(generics.ListAPIView):
         return FitnessActivity.objects.filter(user=userId).order_by('-start_date')
 
 
+from users.models import User
+class UserTemp(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.SimpleUserSerializer
+
+
+
+
 class TrackerList(generics.ListAPIView):
     queryset = FitnessTracker.objects.all()
     serializer_class = serializers.TrackerSerializer
@@ -41,6 +49,7 @@ class TrackerList(generics.ListAPIView):
 class TrackerDetail(generics.RetrieveAPIView):
     queryset = FitnessTracker.objects.all()
     serializer_class = serializers.TrackerSerializer
+
 
 from django.core.exceptions import ObjectDoesNotExist
 class DeactivateTrackerDetail(APIView):
