@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="container-fluid">
+  {% include 'messages.html' %}
   <div class="row">
     <div class="col-md-5">
       <div id="user-profile" class="card profile margin-top" data-user-id='{{ user.id }}'>

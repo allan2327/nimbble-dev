@@ -84,11 +84,11 @@ from requests.exceptions import HTTPError
 from django.contrib.messages import get_messages
 
 class UserSync(APIView):
-    http_method_names = ['get']
+    http_method_names = ['post']
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         user = request.user
         try:
             sync_activities.send(sender=request, user=user)

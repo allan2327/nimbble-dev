@@ -16,21 +16,21 @@ define([
         },
 
         syncActivities: function(e){
+            e.stopPropagation(); e.preventDefault();
             var msg = {
-                url: '/api/v0/tracker/deactivate/',
-                data: { token_id: $(e.target).data('token') },
+                url: '/api/v0/user/sync/',
                 view: this,
             };
 
-            var reset = this.resetActionStatus.bind(this);
-            Dispatcher.post(msg).success(reset);
+            var update = this.updateActivities.bind(this);
+            Dispatcher.post(msg).success(update);
         },
 
-        resetActionStatus: function(d){
+        updateActivities: function(d){
             if(!d.success) return;
 
-            this.$el.find('.js-deactivate').remove();
-            this.$el.find('.js-active').removeClass('hidden');
+            //this.$el.find('.js-deactivate').remove();
+            //this.$el.find('.js-active').removeClass('hidden');
         },
 
         render: function() {

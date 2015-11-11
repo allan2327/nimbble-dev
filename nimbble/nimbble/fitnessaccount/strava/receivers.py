@@ -104,4 +104,4 @@ def sync_user_activities(sender, user, **kwargs):
     except HTTPError as e:
         message = e.args[0]
         auth = tracker.auth_url
-        messages.error(sender._request, 'Sorry!! We had issues authenticating your {0}.<a href="{1}">Please authenticate again.</a>'.format('Strava', auth))
+        messages.error(sender._request, 'Sorry!! We had issues authenticating your {0}. <a href="{1}">Please authenticate again.</a>'.format('Strava', auth))
