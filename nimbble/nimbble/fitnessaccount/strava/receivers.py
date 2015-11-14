@@ -90,6 +90,7 @@ def update_user_activities(sender, nimbble_token, **kwargs):
 from django.core.exceptions import ObjectDoesNotExist
 from requests.exceptions import HTTPError
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 
 @receiver(sync_activities)
 def sync_user_activities(sender, user, **kwargs):
@@ -102,6 +103,6 @@ def sync_user_activities(sender, user, **kwargs):
         pass # If the token does not exists, the user does not have this tracker.
 
     except HTTPError as e:
-        message = e.args[0]
-        auth = tracker.auth_url
-        messages.error(sender._request, 'Sorry!! We had issues authenticating your {0}. <a href="{1}">Please authenticate again.</a>'.format('Strava', auth))
+        auth = reverse('ui:trackers')
+        token.delete()
+        messages.error(sender._request, '<strong>Ohhh no!!</strong> We had issues authenticating your {0}. <a href="{1}">Please authenticate again.</a>'.format('Strava', auth))
