@@ -17,6 +17,7 @@ define([
             var source = this.$el.data('source'),
                 parentId = this.$el.data('source-id');
 
+            // <div data-source="community" data-source-id="1"></div>
             this.collection = new ActivityCollection();
             this.collection.setUrl({ source: source, parentId: parentId });
 

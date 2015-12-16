@@ -108,6 +108,19 @@ class Production(Common):
     )
     # END TEMPLATE CONFIGURATION
 
+    # DATABASE CONFIGURATION
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'odin',
+            'USER' : 'djangotest',
+            'PASSWORD' : '1nf0tecH',
+            'HOST' : 'djangotestdb.czdncmu0tij9.us-west-2.rds.amazonaws.com',
+            'PORT' : '5432',
+        }
+    }
+    # END DATABASE CONFIG
+
     # CACHING
     # Only do this here because thanks to django-pylibmc-sasl and pylibmc
     # memcacheify is painful to install on windows.

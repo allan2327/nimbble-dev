@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
 
     # Uncomment the next line to enable avatars
-    url(r'^avatar/', include('avatar.urls')),
+    #url(r'^avatar/', include('avatar.urls')),
 
     # Your stuff: custom urls go here
     url(r'^api/v0/', include('nimbble.urls', namespace='api')),

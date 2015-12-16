@@ -22,6 +22,7 @@ define(['underscore','backbone','models/activity'], function(_, Backbone, Activi
             hasNextPage: function(){ return !!_nextParam; },
             hasPrevPage: function(){ return !!_prevParam; },
             setUrl: function(data){
+                // api/v0/community/1/activities/
                 _origUrl = this.url = '/api/v0/'+data.source+'/'+data.parentId+'/activities/';
             },
 
@@ -30,11 +31,17 @@ define(['underscore','backbone','models/activity'], function(_, Backbone, Activi
                 this.fetch();
             },
 
+            /*
+                count: 15
+                next: "http://localhost:8000/api/v0/community/1/activities/?page=3"
+                previous: "http://localhost:8000/api/v0/community/1/activities/"
+                results: []
+            */
             parse: function(request){
                 _nextParam = UrlParser.getSearchParam(request.next);
                 _prevParam = UrlParser.getSearchParam(request.previous);
 
-                this.trigger('preParse')
+                this.trigger('preParse');
                 return request.results;
             },
         };
